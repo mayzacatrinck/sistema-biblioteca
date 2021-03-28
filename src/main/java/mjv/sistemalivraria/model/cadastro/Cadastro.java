@@ -1,14 +1,31 @@
 package mjv.sistemalivraria.model.cadastro;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "cadastro")
 public class Cadastro {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
 	private String cpf;
 	private String nome;
 	private String email;
 	private String telefone;
 	private String login;
 	private String senha;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "endereco_id")
 	private Endereco endereco;
 
 	public Integer getId() {

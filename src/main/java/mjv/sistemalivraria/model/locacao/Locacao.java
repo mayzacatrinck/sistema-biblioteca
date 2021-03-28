@@ -4,22 +4,63 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.Table;
 
 import mjv.sistemalivraria.locacao.LocacaoItem;
 import mjv.sistemalivraria.locacao.LocacaoStatus;
 import mjv.sistemalivraria.model.cadastro.Cadastro;
+import mjv.sistemalivraria.model.cadastro.Livro;
 
+@Entity
+@Table(name = "locacao")
 public class Locacao {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@Column(name = "data_agendamento")
 	private LocalDate dataAgendamento;
+
+	@Column(name = "data_retirada")
 	private LocalDate dataRetirada;
+
+	@Column(name = "data_finalizacao")
 	private LocalDate dataFinalizacao;
+
+	@Column(name = "valor_total")
 	private Double valorTotal;
-	
+
+	@ManyToOne
+	@JoinColumn(name = "cadastro_id")
 	private Cadastro cadastro;
+
+	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "locacao")
 	private List<LocacaoItem> itens = new ArrayList<LocacaoItem>();
+
+	@Enumerated(EnumType.STRING)
 	private LocacaoStatus status;
+
+	public void addItem(Livro livro) {
+		LocacaoItem item = new LocacaoItem();
+		item.setLivro(livro);
+		item.setValorDiaria(livro.getValorDiaria());
+		item.setLocacao(this);
+		this.itens.add(item);
+
+	}
 
 	public Integer getId() {
 		return id;
@@ -75,6 +116,13 @@ public class Locacao {
 
 	public Double getValorTotal() {
 		return valorTotal;
+	}
+
+	@PrePersist
+	private void prePersist() {
+		this.dataAgendamento = LocalDate.now();
+		this.status = LocacaoStatus.RESERVADA;
+		this.valorTotal = 0.0;
 	}
 
 	@Override

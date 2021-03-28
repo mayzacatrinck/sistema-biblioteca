@@ -1,25 +1,23 @@
 package mjv.sistemalivraria.model.cadastro;
 
-//import javax.persistence.Column;
-////import javax.persistence.Embedded;
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-////import javax.persistence.PrePersist;
-//import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-//@Entity
-//@Table(name = "tab_livro")
-
+@Entity
+@Table(name = "livro")
 public class Livro {
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String isbn;
 	private String titulo;
 	
-//	@Column(name = "valor_diaria")
+	@Column(name = "valor_diaria")
 	private Double valorDiaria;
 	private Integer exemplares;
 	private Integer reservados;

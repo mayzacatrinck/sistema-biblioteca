@@ -2,18 +2,46 @@ package mjv.sistemalivraria.locacao;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import mjv.sistemalivraria.model.cadastro.Livro;
 import mjv.sistemalivraria.model.locacao.Locacao;
 
+@Entity
+@Table(name = "locacao_item")
 public class LocacaoItem {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name = "data_previsao_entrega")
 	private LocalDate dataPrevisaoEntrega;
+	
+	@Column(name = "data_entrega")
 	private LocalDate dataEntrega;
+	
 	private Integer diarias;
+	
+	@Column(name = "valor_diaria")
 	private Double valorDiaria;
+	
+	@Column(name = "valor_locacao")
 	private Double valorLocacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "locacao_id")
 	private Locacao locacao;
+	
+	@ManyToOne
+	@JoinColumn(name = "livro_id")
 	private Livro livro;
 
 	public Integer getId() {
