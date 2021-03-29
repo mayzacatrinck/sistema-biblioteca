@@ -1,13 +1,35 @@
 package mjv.sistemalivraria.model.cadastro;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "endereco")
 public class Endereco {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+	@Column(nullable = false)
 	private String cep;
+
+	@Column(nullable = false)
 	private String logradouro;
+
+	@Column(nullable = false)
 	private String bairro;
+
+	@Column(nullable = false)
 	private String localidade;
+
+	@Column(nullable = false)
 	private String uf;
+
 	private Integer ibge;
 
 	public Integer getId() {
