@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>mjv</groupId>
-	<artifactId>sistema-livraria</artifactId>
+	<artifactId>sistema-biblioteca</artifactId>
 	<version>1.0</version>
-	<name>sistema-livraria</name>
+	<name>sistema-biblioteca</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>1.8</java.version>
