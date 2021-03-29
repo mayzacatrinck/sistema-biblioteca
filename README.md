@@ -1,5 +1,5 @@
-# sistema-livraria 📚
-Sistema desenvolvido no DevSchool MJV
+# Sistema Biblioteca 📚
+Sistema desenvolvido como desafio na DevSchool MJV
 
 #### Grupo 3
                 
