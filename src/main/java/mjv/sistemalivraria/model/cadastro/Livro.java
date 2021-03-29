@@ -14,12 +14,20 @@ public class Livro {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(nullable = false)
 	private String isbn;
+	
+	@Column(nullable = false)
 	private String titulo;
 	
-	@Column(name = "valor_diaria")
+	@Column(name = "valor_diaria", nullable = false)
 	private Double valorDiaria;
+	
+	@Column(nullable = false)
 	private Integer exemplares;
+	
+	@Column(nullable = false)
 	private Integer reservados;
 
 	public Integer getId() {

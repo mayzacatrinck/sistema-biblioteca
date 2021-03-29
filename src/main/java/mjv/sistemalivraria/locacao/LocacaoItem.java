@@ -37,11 +37,11 @@ public class LocacaoItem {
 	private Double valorLocacao;
 	
 	@ManyToOne
-	@JoinColumn(name = "locacao_id")
+	@JoinColumn(name = "locacao_id", nullable = false)
 	private Locacao locacao;
 	
 	@ManyToOne
-	@JoinColumn(name = "livro_id")
+	@JoinColumn(name = "livro_id", nullable = false)
 	private Livro livro;
 
 	public Integer getId() {

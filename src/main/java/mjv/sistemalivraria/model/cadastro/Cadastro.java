@@ -1,6 +1,7 @@
 package mjv.sistemalivraria.model.cadastro;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,15 +18,26 @@ public class Cadastro {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
+	@Column(nullable = false, unique = true, length = 11)
 	private String cpf;
+	
+	@Column(nullable = false)
 	private String nome;
+	
+	@Column(nullable = false)
 	private String email;
+	
+	@Column(nullable = false)
 	private String telefone;
+	
+	@Column(nullable = false, unique = true, length = 20)
 	private String login;
+	
+	@Column(nullable = false)
 	private String senha;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "endereco_id")
+	@JoinColumn(name = "endereco_id", nullable = false)
 	private Endereco endereco;
 
 	public Integer getId() {

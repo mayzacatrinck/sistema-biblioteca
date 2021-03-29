@@ -44,7 +44,7 @@ public class Locacao {
 	private Double valorTotal;
 
 	@ManyToOne
-	@JoinColumn(name = "cadastro_id")
+	@JoinColumn(name = "cadastro_id", nullable = false)
 	private Cadastro cadastro;
 
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "locacao")
