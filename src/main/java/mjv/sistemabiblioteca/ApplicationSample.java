@@ -12,10 +12,14 @@ import mjv.sistemabiblioteca.model.locacao.Locacao;
 import mjv.sistemabiblioteca.repository.CadastroRepository;
 import mjv.sistemabiblioteca.repository.LivroRepository;
 import mjv.sistemabiblioteca.repository.LocacaoRepository;
+import mjv.sistemabiblioteca.service.CadastroService;
 
 @Component
 public class ApplicationSample {
-	
+
+	@Autowired
+	private CadastroService cadastroService;
+
 	@Autowired
 	private CadastroRepository cadastroRepository;
 
@@ -24,18 +28,18 @@ public class ApplicationSample {
 
 	@Autowired
 	private LocacaoRepository locacaoRepository;
-	
+
 	public void criarCadastroSample() {
 		Cadastro cadastro = new Cadastro();
 		cadastro.setNome("Ana da Silva");
-		cadastro.setCpf("14578963147");
-		cadastro.setLogin("anadasilva");
-		cadastro.setTelefone("999999999");
-		cadastro.setSenha("123");
+		cadastro.setCpf("124578896");
+		cadastro.setTelefone("478785475");
+		cadastro.setLogin("6647742");
+		cadastro.setSenha("1234");
 		cadastro.setEmail("anadasilva@gmail.com");
 
 		Endereco endereco = new Endereco();
-		endereco.setCep("21547895");
+		endereco.setCep("12455");
 		endereco.setBairro("Campina");
 		endereco.setLogradouro("Rua Nova");
 		endereco.setLocalidade("Rio de Janeiro");
@@ -44,7 +48,7 @@ public class ApplicationSample {
 
 		cadastro.setEndereco(endereco);
 
-		cadastroRepository.save(cadastro);
+		cadastroService.cadastrarUsuario(cadastro);
 	}
 
 	public void cadastrarLivroSample() {
@@ -71,12 +75,13 @@ public class ApplicationSample {
 	}
 
 	public Cadastro consultarCadastroSample() {
-		Optional<Cadastro> cadastro = cadastroRepository.findById(1);
-		if (cadastro != null)
-			System.out.println(cadastro.get().getNome() + " " + cadastro.get().getEndereco().getLocalidade());
-		else
+		Cadastro usuario = cadastroRepository.findById(1).orElse(null);
+		if (usuario == null) {
 			criarCadastroSample();
-		return cadastro.get();
+			usuario = cadastroRepository.findById(1).orElse(null);
+		}
+
+		return usuario;
 	}
 
 	public void gerarLocacaoSample() {

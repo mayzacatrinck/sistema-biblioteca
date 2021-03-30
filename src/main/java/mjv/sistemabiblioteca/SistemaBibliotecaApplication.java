@@ -12,14 +12,14 @@ public class SistemaBibliotecaApplication {
 		SpringApplication.run(SistemaBibliotecaApplication.class, args);
 		System.out.println("Rodouuuuu!!");
 	}
-	
+
 	@Bean
 	public CommandLineRunner run(ApplicationSample as) throws Exception {
 		return args -> {
 			as.cadastrarLivroSample();
-//			as.criarCadastroSample();
+			as.criarCadastroSample();
 //			as.gerarLocacaoSample();
-		
+
 			System.out.println("Cadastro realizado com sucesso");
 
 		};
