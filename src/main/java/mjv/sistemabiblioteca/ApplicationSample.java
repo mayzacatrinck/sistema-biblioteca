@@ -1,17 +1,17 @@
-package mjv.sistemalivraria;
+package mjv.sistemabiblioteca;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mjv.sistemalivraria.model.cadastro.Cadastro;
-import mjv.sistemalivraria.model.cadastro.Endereco;
-import mjv.sistemalivraria.model.cadastro.Livro;
-import mjv.sistemalivraria.model.locacao.Locacao;
-import mjv.sistemalivraria.repository.CadastroRepository;
-import mjv.sistemalivraria.repository.LivroRepository;
-import mjv.sistemalivraria.repository.LocacaoRepository;
+import mjv.sistemabiblioteca.model.cadastro.Cadastro;
+import mjv.sistemabiblioteca.model.cadastro.Endereco;
+import mjv.sistemabiblioteca.model.cadastro.Livro;
+import mjv.sistemabiblioteca.model.locacao.Locacao;
+import mjv.sistemabiblioteca.repository.CadastroRepository;
+import mjv.sistemabiblioteca.repository.LivroRepository;
+import mjv.sistemabiblioteca.repository.LocacaoRepository;
 
 @Component
 public class ApplicationSample {

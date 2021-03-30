@@ -1,4 +1,4 @@
-package mjv.sistemalivraria.locacao;
+package mjv.sistemabiblioteca.locacao;
 
 public enum LocacaoStatus {
 

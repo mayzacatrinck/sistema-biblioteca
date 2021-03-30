@@ -1,4 +1,4 @@
-package mjv.sistemalivraria.model.locacao;
+package mjv.sistemabiblioteca.model.locacao;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,10 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
-import mjv.sistemalivraria.locacao.LocacaoItem;
-import mjv.sistemalivraria.locacao.LocacaoStatus;
-import mjv.sistemalivraria.model.cadastro.Cadastro;
-import mjv.sistemalivraria.model.cadastro.Livro;
+import mjv.sistemabiblioteca.locacao.LocacaoItem;
+import mjv.sistemabiblioteca.locacao.LocacaoStatus;
+import mjv.sistemabiblioteca.model.cadastro.Cadastro;
+import mjv.sistemabiblioteca.model.cadastro.Livro;
 
 @Entity
 @Table(name = "locacao")

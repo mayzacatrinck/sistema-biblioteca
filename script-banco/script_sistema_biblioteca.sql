@@ -1,6 +1,6 @@
-CREATE DATABASE sistema_livraria;
+CREATE DATABASE sistema_biblioteca;
 
-use sistema_livraria;
+use sistema_biblioteca;
 
 CREATE TABLE cadastro (
 id INT PRIMARY KEY auto_increment,

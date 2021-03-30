@@ -1,4 +1,4 @@
-package mjv.sistemalivraria.locacao;
+package mjv.sistemabiblioteca.locacao;
 
 import java.time.LocalDate;
 
@@ -11,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import mjv.sistemalivraria.model.cadastro.Livro;
-import mjv.sistemalivraria.model.locacao.Locacao;
+import mjv.sistemabiblioteca.model.cadastro.Livro;
+import mjv.sistemabiblioteca.model.locacao.Locacao;
 
 @Entity
 @Table(name = "locacao_item")

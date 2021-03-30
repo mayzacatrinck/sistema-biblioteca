@@ -1,12 +1,12 @@
-package mjv.sistemalivraria.service;
+package mjv.sistemabiblioteca.service;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mjv.sistemalivraria.model.cadastro.Cadastro;
-import mjv.sistemalivraria.repository.CadastroRepository;
+import mjv.sistemabiblioteca.model.cadastro.Cadastro;
+import mjv.sistemabiblioteca.repository.CadastroRepository;
 
 @Service
 public class CadastroService {

@@ -1,11 +1,11 @@
-package mjv.sistemalivraria.repository;
+package mjv.sistemabiblioteca.repository;
 
 import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import mjv.sistemalivraria.model.cadastro.Cadastro;
+import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 
 @Repository
 public interface CadastroRepository extends CrudRepository<Cadastro, Integer> {

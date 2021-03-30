@@ -1,4 +1,4 @@
-package mjv.sistemalivraria.model.cadastro;
+package mjv.sistemabiblioteca.model.cadastro;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
