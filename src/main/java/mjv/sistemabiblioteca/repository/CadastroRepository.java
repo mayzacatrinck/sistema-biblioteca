@@ -10,7 +10,8 @@ import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 @Repository
 public interface CadastroRepository extends JpaRepository<Cadastro, Integer> {
 
-	Optional<Cadastro> findByLogin(String login);
 	Optional<Cadastro> findByCpf(String cpf);
+
+	Optional<Cadastro> findByLoginUsuario(String usuario);
 
 }

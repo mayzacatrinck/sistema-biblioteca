@@ -8,7 +8,7 @@ cpf VARCHAR(11) NOT NULL,
 nome VARCHAR(255) NOT NULL,
 email VARCHAR(255) NOT NULL,
 telefone VARCHAR(255) NOT NULL,
-login VARCHAR(20) NOT NULL,
+usuario VARCHAR(20) NOT NULL,
 senha VARCHAR(255) NOT NULL,
 endereco_id INT NOT NULL
 );
@@ -66,8 +66,8 @@ ADD CONSTRAINT un_cpf
 UNIQUE (cpf);
 
 ALTER TABLE cadastro
-ADD CONSTRAINT un_login
-UNIQUE (login);
+ADD CONSTRAINT un_usuario
+UNIQUE (usuario);
 
 ALTER TABLE locacao
 ADD CONSTRAINT fk_id_cad

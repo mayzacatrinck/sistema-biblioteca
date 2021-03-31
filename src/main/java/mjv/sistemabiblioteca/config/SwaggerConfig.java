@@ -39,7 +39,7 @@ public class SwaggerConfig {
 		docket
 		.globalOperationParameters(params)
 		.select()
-		.apis(RequestHandlerSelectors.basePackage("mjv.sistema.biblioteca.controller"))
+		.apis(RequestHandlerSelectors.basePackage("mjv.sistemabiblioteca.controller"))
 		.paths(PathSelectors.any())
 		.build()
 		.apiInfo(this.informacoesApi().build())
@@ -54,11 +54,11 @@ public class SwaggerConfig {
 
 		ApiInfoBuilder apiInfoBuilder = new ApiInfoBuilder();
 
-		apiInfoBuilder.title("Digytal - Springboot JPA - REST API");
-		apiInfoBuilder.description("API exemplo de uso de Springboot JPA e REST API");
+		apiInfoBuilder.title("Sistema Biblioteca");
+		apiInfoBuilder.description("API desenvolvida durante o curso de Java da MJV");
 		apiInfoBuilder.version("1.0");
-		apiInfoBuilder.termsOfServiceUrl("Termo de uso: Digytal");
-		apiInfoBuilder.license("Licença - Digytal");
+		apiInfoBuilder.termsOfServiceUrl(" ");
+		apiInfoBuilder.license(" ");
 		apiInfoBuilder.licenseUrl("http://www.digytal.com.br");
 		apiInfoBuilder.contact(this.contato());
 
@@ -68,8 +68,8 @@ public class SwaggerConfig {
 	private Contact contato() {
 
 		return new Contact(
-				"Gleyson Sampaio",
-				"http://www.digytal.com.br", 
-				"gleyson@digytal.com.br");
+				"Grupo 3 GitHub",
+				"https://github.com/MJV-Grupo3/sistema-biblioteca", 
+				" ");
 	}
 }

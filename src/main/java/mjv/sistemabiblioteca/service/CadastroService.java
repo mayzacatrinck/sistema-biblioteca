@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import mjv.sistemabiblioteca.exception.ValidationException;
@@ -12,33 +13,40 @@ import mjv.sistemabiblioteca.repository.CadastroRepository;
 
 @Service
 public class CadastroService {
-
 	@Autowired
 	private CadastroRepository cadastroRepository;
 
-	public Cadastro cadastrarUsuario(Cadastro usuario) {
+	@Autowired
+	private PasswordEncoder encoder;
 
-		validaNaoNulo(usuario);
+	public void cadastrarUsuario(Cadastro cadastro) {
 
-		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(usuario.getCpf());
-		Optional<Cadastro> buscaLogin = cadastroRepository.findByLogin(usuario.getLogin());
+		validaNaoNulo(cadastro);
+
+		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(cadastro.getCpf());
+		Optional<Cadastro> buscaLogin = cadastroRepository.findByLoginUsuario(cadastro.getLogin().getUsuario());
+
 		if (buscaCpf.isPresent() || buscaLogin.isPresent()) {
 			throw new ValidationException("CPF ou Login já cadastrados.");
+
 		}
 
-		if (usuario.getCpf().length() > 11) {
+		if (cadastro.getCpf().length() > 11) {
 			throw new ValidationException("CPF inválido");
+
 		}
 
-		if (usuario.getLogin().length() > 20) {
+		if (cadastro.getLogin().getUsuario().length() > 20) {
 			throw new ValidationException("O login não pode conter mais que 20 caracteres");
 		}
 
-		validaEndereco(usuario);
+		validaEndereco(cadastro);
 
-		usuario = cadastroRepository.save(usuario);
+		String senhaCriptografada = encoder.encode(cadastro.getLogin().getSenha());
+		cadastro.getLogin().setSenha(senhaCriptografada);
 
-		return usuario;
+		cadastroRepository.save(cadastro);
+
 	}
 
 	public List<Cadastro> buscarTodosUsuarios() {
@@ -54,13 +62,13 @@ public class CadastroService {
 	}
 
 	public Optional<Cadastro> buscaUsuarioLogin(String login) {
-		return cadastroRepository.findByLogin(login);
+		return cadastroRepository.findByLoginUsuario(login);
 	}
 
 	private void validaNaoNulo(Cadastro usuario) {
-		String login = usuario.getLogin();
+		String login = usuario.getLogin().getSenha();
 		String cpf = usuario.getCpf();
-		String senha = usuario.getSenha();
+		String senha = usuario.getLogin().getSenha();
 
 		if (login == null || login.isEmpty() || cpf == null || cpf.isEmpty() || senha == null || senha.isEmpty()) {
 			throw new ValidationException("Usuário não cadastrado. Os campos não podem ser nulos.");

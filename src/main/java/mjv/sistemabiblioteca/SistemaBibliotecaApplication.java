@@ -15,6 +15,7 @@ public class SistemaBibliotecaApplication {
 	@Bean
 	public CommandLineRunner run(ApplicationSample as) throws Exception {
 		return args -> {
+			as.usuarioPadrao();
 //			as.cadastrarLivroSample();
 //			as.criarCadastroSample();
 //			as.gerarLocacaoSample();
