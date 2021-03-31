@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import mjv.sistemabiblioteca.exception.ValidationException;
+import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.repository.CadastroRepository;
 
@@ -27,17 +27,17 @@ public class CadastroService {
 		Optional<Cadastro> buscaLogin = cadastroRepository.findByLoginUsuario(cadastro.getLogin().getUsuario());
 
 		if (buscaCpf.isPresent() || buscaLogin.isPresent()) {
-			throw new ValidationException("CPF ou Login já cadastrados.");
+			throw new BusinessException("CPF ou Login já cadastrados.");
 
 		}
 
 		if (cadastro.getCpf().length() > 11) {
-			throw new ValidationException("CPF inválido");
+			throw new BusinessException("CPF inválido");
 
 		}
 
 		if (cadastro.getLogin().getUsuario().length() > 20) {
-			throw new ValidationException("O login não pode conter mais que 20 caracteres");
+			throw new BusinessException("O login não pode conter mais que 20 caracteres");
 		}
 
 		validaEndereco(cadastro);
@@ -71,7 +71,7 @@ public class CadastroService {
 		String senha = usuario.getLogin().getSenha();
 
 		if (login == null || login.isEmpty() || cpf == null || cpf.isEmpty() || senha == null || senha.isEmpty()) {
-			throw new ValidationException("Usuário não cadastrado. Os campos não podem ser nulos.");
+			throw new BusinessException("Usuário não cadastrado. Os campos não podem ser nulos.");
 		}
 	}
 
@@ -85,7 +85,7 @@ public class CadastroService {
 		if (usuario.getEndereco() == null || cep == null || cep.isEmpty() || logradouro == null || logradouro.isEmpty()
 				|| bairro == null || bairro.isEmpty() || localidade == null || localidade.isEmpty() || uf == null
 				|| uf.isEmpty()) {
-			throw new ValidationException("Cadastro não realizado. Insira os campos de Endereço.");
+			throw new BusinessException("Cadastro não realizado. Insira os campos de Endereço.");
 		}
 	}
 
