@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import mjv.sistemabiblioteca.config.JWTConstants;
 import mjv.sistemabiblioteca.config.JWTUtils;
+import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.model.cadastro.Login;
 import mjv.sistemabiblioteca.model.cadastro.Sessao;
@@ -45,11 +46,11 @@ public class LoginService {
 				sessao.setToken(token);
 				return sessao;
 			} else {
-				throw new RuntimeException("Senha inválida");
+				throw new BusinessException("Senha inválida");
 			}
 
 		}
 
-		throw new RuntimeException("Login inválido");
+		throw new BusinessException("Login inválido");
 	}
 }
