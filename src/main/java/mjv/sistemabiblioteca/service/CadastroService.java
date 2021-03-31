@@ -13,6 +13,7 @@ import mjv.sistemabiblioteca.repository.CadastroRepository;
 
 @Service
 public class CadastroService {
+	
 	@Autowired
 	private CadastroRepository cadastroRepository;
 
@@ -21,12 +22,12 @@ public class CadastroService {
 
 	public void cadastrarUsuario(Cadastro cadastro) {
 
-		validaNaoNulo(cadastro);
+		validaCampoNaoNulo(cadastro);
 
 		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(cadastro.getCpf());
-		Optional<Cadastro> buscaLogin = cadastroRepository.findByLoginUsuario(cadastro.getLogin().getUsuario());
+		Optional<Cadastro> buscaUsuario = cadastroRepository.findByLoginUsuario(cadastro.getLogin().getUsuario());
 
-		if (buscaCpf.isPresent() || buscaLogin.isPresent()) {
+		if (buscaCpf.isPresent() || buscaUsuario.isPresent()) {
 			throw new BusinessException("CPF ou Login já cadastrados.");
 
 		}
@@ -65,8 +66,8 @@ public class CadastroService {
 		return cadastroRepository.findByLoginUsuario(login);
 	}
 
-	private void validaNaoNulo(Cadastro usuario) {
-		String login = usuario.getLogin().getSenha();
+	private void validaCampoNaoNulo(Cadastro usuario) {
+		String login = usuario.getLogin().getUsuario();
 		String cpf = usuario.getCpf();
 		String senha = usuario.getLogin().getSenha();
 
