@@ -5,6 +5,6 @@ Sistema desenvolvido como desafio na DevSchool MJV
                 
 + Mayza
 + Priscila
-+ Ian
++ ~~Ian~~
 + João Oliveira
 + Lucas Anastacio
