@@ -6,8 +6,8 @@ import java.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mjv.sistemabiblioca.dto.LocacaoDto;
-import mjv.sistemabiblioca.dto.LocacaoItemDto;
+import mjv.sistemabiblioteca.dto.LocacaoDto;
+import mjv.sistemabiblioteca.dto.LocacaoItemDto;
 import mjv.sistemabiblioteca.exception.RegistroNaoLocalizadoException;
 import mjv.sistemabiblioteca.locacao.LocacaoItem;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;

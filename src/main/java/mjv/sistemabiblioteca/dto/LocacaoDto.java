@@ -1,4 +1,4 @@
-package mjv.sistemabiblioca.dto;
+package mjv.sistemabiblioteca.dto;
 
 import java.time.LocalDate;
 import java.util.List;

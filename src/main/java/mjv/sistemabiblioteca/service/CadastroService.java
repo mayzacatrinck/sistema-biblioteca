@@ -8,7 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import mjv.sistemabiblioca.dto.CadastroDto;
+import mjv.sistemabiblioteca.dto.CadastroDto;
 import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.model.cadastro.Endereco;

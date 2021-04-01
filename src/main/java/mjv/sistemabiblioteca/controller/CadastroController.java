@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import mjv.sistemabiblioca.dto.CadastroDto;
+import mjv.sistemabiblioteca.dto.CadastroDto;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.service.CadastroService;
 

@@ -3,7 +3,7 @@ package mjv.sistemabiblioteca;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mjv.sistemabiblioca.dto.CadastroDto;
+import mjv.sistemabiblioteca.dto.CadastroDto;
 import mjv.sistemabiblioteca.model.cadastro.Login;
 import mjv.sistemabiblioteca.service.CadastroService;
 
