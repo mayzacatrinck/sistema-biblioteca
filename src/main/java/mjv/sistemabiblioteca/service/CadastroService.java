@@ -20,7 +20,7 @@ public class CadastroService {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	public void cadastrarUsuario(Cadastro cadastro) {
+	public Cadastro cadastrarUsuario(Cadastro cadastro) {
 
 		validaCampoNaoNulo(cadastro);
 
@@ -46,7 +46,7 @@ public class CadastroService {
 		String senhaCriptografada = encoder.encode(cadastro.getLogin().getSenha());
 		cadastro.getLogin().setSenha(senhaCriptografada);
 
-		cadastroRepository.save(cadastro);
+		return cadastroRepository.save(cadastro);
 
 	}
 
