@@ -1,7 +1,6 @@
 package mjv.sistemabiblioteca.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import mjv.sistemabiblioca.dto.CadastroDto;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.service.CadastroService;
 
@@ -22,7 +22,7 @@ public class CadastroController {
 	private CadastroService cadastroService;
 
 	@PostMapping
-	public void postCadastrarUsuario(@RequestBody Cadastro cadastro) {
+	public void postCadastrarUsuario(@RequestBody CadastroDto cadastro) {
 		cadastroService.cadastrarUsuario(cadastro);
 	}
 
@@ -32,17 +32,17 @@ public class CadastroController {
 	}
 
 	@GetMapping("/id")
-	public Optional<Cadastro> getUsuarioId(@RequestParam Integer id) {
+	public Cadastro getUsuarioId(@RequestParam Integer id) {
 		return cadastroService.buscarUsuarioId(id);
 	}
 
 	@GetMapping("/cpf")
-	public Optional<Cadastro> getUsuarioCpf(@RequestParam String cpf) {
+	public Cadastro getUsuarioCpf(@RequestParam String cpf) {
 		return cadastroService.buscaUsuarioCpf(cpf);
 	}
 
 	@GetMapping("/login")
-	public Optional<Cadastro> getUsuarioLogin(@RequestParam String login) {
+	public Cadastro getUsuarioLogin(@RequestParam String login) {
 		return cadastroService.buscaUsuarioLogin(login);
 	}
 

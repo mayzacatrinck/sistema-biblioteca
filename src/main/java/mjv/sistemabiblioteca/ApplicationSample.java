@@ -3,8 +3,7 @@ package mjv.sistemabiblioteca;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import mjv.sistemabiblioteca.model.cadastro.Cadastro;
-import mjv.sistemabiblioteca.model.cadastro.Endereco;
+import mjv.sistemabiblioca.dto.CadastroDto;
 import mjv.sistemabiblioteca.model.cadastro.Login;
 import mjv.sistemabiblioteca.service.CadastroService;
 
@@ -23,7 +22,7 @@ public class ApplicationSample {
 	 */
 
 	public void usuarioPadrao() {
-		Cadastro cadastro = new Cadastro();
+		CadastroDto cadastro = new CadastroDto();
 		cadastro.setNome("Usuario Padrao");
 		cadastro.setCpf("124578896");
 		cadastro.setTelefone("478785475");
@@ -35,15 +34,8 @@ public class ApplicationSample {
 		
 		cadastro.setLogin(login);
 
-		Endereco endereco = new Endereco();
-		endereco.setCep("12455");
-		endereco.setBairro("Campina");
-		endereco.setLogradouro("Rua Nova");
-		endereco.setLocalidade("Rio de Janeiro");
-		endereco.setIbge(45);
-		endereco.setUf("RJ");
 
-		cadastro.setEndereco(endereco);
+		cadastro.setCep("23045040");
 
 		cadastroService.cadastrarUsuario(cadastro);
 	}

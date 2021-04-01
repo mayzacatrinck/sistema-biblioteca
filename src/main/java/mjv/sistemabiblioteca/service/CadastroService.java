@@ -6,9 +6,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
+import mjv.sistemabiblioca.dto.CadastroDto;
 import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
+import mjv.sistemabiblioteca.model.cadastro.Endereco;
 import mjv.sistemabiblioteca.repository.CadastroRepository;
 
 @Service
@@ -20,28 +23,38 @@ public class CadastroService {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	public Cadastro cadastrarUsuario(Cadastro cadastro) {
+	public Cadastro cadastrarUsuario(CadastroDto cadDto) {
 
-		validaCampoNaoNulo(cadastro);
+		validaCampoNaoNulo(cadDto);
 
-		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(cadastro.getCpf());
-		Optional<Cadastro> buscaUsuario = cadastroRepository.findByLoginUsuario(cadastro.getLogin().getUsuario());
+		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(cadDto.getCpf());
+		Optional<Cadastro> buscaUsuario = cadastroRepository.findByLoginUsuario(cadDto.getLogin().getUsuario());
 
 		if (buscaCpf.isPresent() || buscaUsuario.isPresent()) {
-			throw new BusinessException("CPF ou Login já cadastrados.");
+			throw new BusinessException("CPF ou usuário já cadastrados.");
 
 		}
 
-		if (cadastro.getCpf().length() > 11) {
+		if (cadDto.getCpf().length() > 11) {
 			throw new BusinessException("CPF inválido");
 
 		}
 
-		if (cadastro.getLogin().getUsuario().length() > 20) {
+		if (cadDto.getLogin().getUsuario().length() > 20) {
 			throw new BusinessException("O login não pode conter mais que 20 caracteres");
 		}
 
-		validaEndereco(cadastro);
+		Cadastro cadastro = new Cadastro();
+		cadastro.setCpf(cadDto.getCpf());
+		cadastro.setEmail(cadDto.getEmail());
+		cadastro.setLogin(cadDto.getLogin());
+		cadastro.setNome(cadDto.getNome());
+		cadastro.setTelefone(cadDto.getTelefone());
+
+		RestTemplate template = new RestTemplate();
+		Endereco end = template.getForObject("https://viacep.com.br/ws/{cep}/json", Endereco.class, cadDto.getCep());
+		
+		cadastro.setEndereco(end);
 
 		String senhaCriptografada = encoder.encode(cadastro.getLogin().getSenha());
 		cadastro.getLogin().setSenha(senhaCriptografada);
@@ -54,40 +67,30 @@ public class CadastroService {
 		return cadastroRepository.findAll();
 	}
 
-	public Optional<Cadastro> buscarUsuarioId(Integer id) {
-		return cadastroRepository.findById(id);
+	public Cadastro buscarUsuarioId(Integer id) {
+		return cadastroRepository.findById(id).orElse(null);
 	}
 
-	public Optional<Cadastro> buscaUsuarioCpf(String cpf) {
-		return cadastroRepository.findByCpf(cpf);
+	public Cadastro buscaUsuarioCpf(String cpf) {
+		return cadastroRepository.findByCpf(cpf).orElse(null);
 	}
 
-	public Optional<Cadastro> buscaUsuarioLogin(String login) {
-		return cadastroRepository.findByLoginUsuario(login);
+	public Cadastro buscaUsuarioLogin(String login) {
+		return cadastroRepository.findByLoginUsuario(login).orElse(null);
 	}
 
-	private void validaCampoNaoNulo(Cadastro usuario) {
+	private void validaCampoNaoNulo(CadastroDto usuario) {
 		String login = usuario.getLogin().getUsuario();
 		String cpf = usuario.getCpf();
 		String senha = usuario.getLogin().getSenha();
+		String cep = usuario.getCep();
 
-		if (login == null || login.isEmpty() || cpf == null || cpf.isEmpty() || senha == null || senha.isEmpty()) {
+		if (login == null || login.isEmpty() || cpf == null || cpf.isEmpty() || senha == null || senha.isEmpty() || cep == null || cep.isEmpty()) {
 			throw new BusinessException("Usuário não cadastrado. Os campos não podem ser nulos.");
 		}
 	}
 
-	private void validaEndereco(Cadastro usuario) {
-		String cep = usuario.getEndereco().getCep();
-		String logradouro = usuario.getEndereco().getLogradouro();
-		String bairro = usuario.getEndereco().getBairro();
-		String localidade = usuario.getEndereco().getLocalidade();
-		String uf = usuario.getEndereco().getUf();
-
-		if (usuario.getEndereco() == null || cep == null || cep.isEmpty() || logradouro == null || logradouro.isEmpty()
-				|| bairro == null || bairro.isEmpty() || localidade == null || localidade.isEmpty() || uf == null
-				|| uf.isEmpty()) {
-			throw new BusinessException("Cadastro não realizado. Insira os campos de Endereço.");
-		}
-	}
+	
+	
 
 }

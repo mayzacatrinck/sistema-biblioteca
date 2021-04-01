@@ -21,7 +21,6 @@ import javax.persistence.Table;
 import mjv.sistemabiblioteca.locacao.LocacaoItem;
 import mjv.sistemabiblioteca.locacao.LocacaoStatus;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
-import mjv.sistemabiblioteca.model.cadastro.Livro;
 
 @Entity
 @Table(name = "locacao")
@@ -41,7 +40,7 @@ public class Locacao {
 	private LocalDate dataFinalizacao;
 
 	@Column(name = "valor_total")
-	private Double valorTotal;
+	private Double valorTotal = 0.0;
 
 	@ManyToOne
 	@JoinColumn(name = "cadastro_id", nullable = false)
@@ -53,13 +52,10 @@ public class Locacao {
 	@Enumerated(EnumType.STRING)
 	private LocacaoStatus status;
 
-	public void addItem(Livro livro) {
-		LocacaoItem item = new LocacaoItem();
-		item.setLivro(livro);
-		item.setValorDiaria(livro.getValorDiaria());
+	public void addItem(LocacaoItem item) {
 		item.setLocacao(this);
-		this.itens.add(item);
-
+		this.valorTotal = this.valorTotal + item.getValorLocacao();
+		itens.add(item);
 	}
 
 	public Integer getId() {
@@ -122,7 +118,6 @@ public class Locacao {
 	private void prePersist() {
 		this.dataAgendamento = LocalDate.now();
 		this.status = LocacaoStatus.RESERVADA;
-		this.valorTotal = 0.0;
 	}
 
 	@Override

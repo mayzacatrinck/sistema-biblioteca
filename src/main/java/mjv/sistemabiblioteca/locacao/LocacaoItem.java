@@ -95,6 +95,14 @@ public class LocacaoItem {
 	public Double getValorLocacao() {
 		return valorLocacao;
 	}
+	
+	public void setDiarias(Integer diarias) {
+		this.diarias = diarias;
+	}
+	
+	public void setValorLocacao(Double valorLocacao) {
+		this.valorLocacao = valorLocacao;
+	}
 
 	@Override
 	public String toString() {
