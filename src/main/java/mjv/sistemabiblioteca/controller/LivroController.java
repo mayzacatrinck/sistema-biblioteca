@@ -22,7 +22,7 @@ public class LivroController {
 		livroService.cadastrarLivro(livro);
 	}
 
-	@GetMapping("/livros")
+	@GetMapping("/todos")
 	public Iterable<Livro> getListarLivros() {
 		return livroService.buscarTodosLivros();
 	}

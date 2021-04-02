@@ -26,31 +26,26 @@ public class LoginService {
 
 	public Sessao logar(Login login) {
 
-		Optional<Cadastro> usuario = cadastroRepository.findByLoginUsuario(login.getUsuario());
-		if (usuario != null) {
+		Optional<Cadastro> usuario = Optional.ofNullable(cadastroRepository.findByLoginUsuario(login.getUsuario()).orElseThrow(() -> new BusinessException("Login inválido")));
+		
+		boolean senhaOk = encoder.matches(login.getSenha(), usuario.get().getLogin().getSenha());
 
-			boolean senhaOk = encoder.matches(login.getSenha(), usuario.get().getLogin().getSenha());
+		if (senhaOk) {
+			Sessao sessao = new Sessao();
+			sessao.setLogin(login.getUsuario());
 
-			if (senhaOk) {
-				Sessao sessao = new Sessao();
-				sessao.setLogin(login.getUsuario());
+			Date inicio = new Date(System.currentTimeMillis());
+			Date fim = new Date(System.currentTimeMillis() + JWTConstants.TOKEN_EXPIRATION);
 
-				Date inicio = new Date(System.currentTimeMillis());
-				Date fim = new Date(System.currentTimeMillis() + JWTConstants.TOKEN_EXPIRATION);
+			sessao.setDataInicio(inicio);
+			sessao.setDataFim(fim);
 
-				sessao.setDataInicio(inicio);
-				sessao.setDataFim(fim);
+			String token = JWTUtils.creteToken(login.getUsuario(), inicio, fim);
 
-				String token = JWTUtils.creteToken(login.getUsuario(), inicio, fim);
-
-				sessao.setToken(token);
-				return sessao;
-			} else {
-				throw new BusinessException("Senha inválida");
-			}
-
-		}
-
-		throw new BusinessException("Login inválido");
+			sessao.setToken(token);
+			return sessao;
+		} else {
+			throw new BusinessException("Senha inválida");
+		}		
 	}
 }
