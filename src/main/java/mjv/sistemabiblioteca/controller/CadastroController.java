@@ -2,6 +2,8 @@ package mjv.sistemabiblioteca.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +24,7 @@ public class CadastroController {
 	private CadastroService cadastroService;
 
 	@PostMapping
-	public void postCadastrarUsuario(@RequestBody CadastroDto cadastro) {
+	public void postCadastrarUsuario(@Valid @RequestBody CadastroDto cadastro) {
 		cadastroService.cadastrarUsuario(cadastro);
 	}
 

@@ -16,13 +16,6 @@ public class SistemaBibliotecaApplication {
 	public CommandLineRunner run(ApplicationSample as) throws Exception {
 		return args -> {
 			as.usuarioPadrao();
-//			as.cadastrarLivroSample();
-//			as.criarCadastroSample();
-//			as.gerarLocacaoSample();
-//			
-//			as.usuarioPadrao();
-
-			System.out.println("Cadastro realizado com sucesso");
 
 		};
 	}

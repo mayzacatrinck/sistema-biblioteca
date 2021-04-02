@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import mjv.sistemabiblioteca.config.JWTConstants;
 import mjv.sistemabiblioteca.config.JWTUtils;
+import mjv.sistemabiblioteca.dto.LoginDto;
 import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
-import mjv.sistemabiblioteca.model.cadastro.Login;
 import mjv.sistemabiblioteca.model.cadastro.Sessao;
 import mjv.sistemabiblioteca.repository.CadastroRepository;
 
@@ -24,10 +24,11 @@ public class LoginService {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	public Sessao logar(Login login) {
+	public Sessao logar(LoginDto login) {
 
-		Optional<Cadastro> usuario = Optional.ofNullable(cadastroRepository.findByLoginUsuario(login.getUsuario()).orElseThrow(() -> new BusinessException("Login inválido")));
-		
+		Optional<Cadastro> usuario = Optional.ofNullable(cadastroRepository.findByLoginUsuario(login.getUsuario())
+				.orElseThrow(() -> new BusinessException("Login inválido")));
+
 		boolean senhaOk = encoder.matches(login.getSenha(), usuario.get().getLogin().getSenha());
 
 		if (senhaOk) {
@@ -46,6 +47,6 @@ public class LoginService {
 			return sessao;
 		} else {
 			throw new BusinessException("Senha inválida");
-		}		
+		}
 	}
 }
