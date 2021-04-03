@@ -11,7 +11,7 @@ import mjv.sistemabiblioteca.model.cadastro.Livro;
 import mjv.sistemabiblioteca.service.LivroService;
 
 @RestController
-@RequestMapping(path = "/livros")
+@RequestMapping(path = "/livro")
 public class LivroController {
 	
 	@Autowired

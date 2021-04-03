@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import mjv.sistemabiblioteca.exception.CampoObrigatorioException;
 import mjv.sistemabiblioteca.model.cadastro.Livro;
 import mjv.sistemabiblioteca.repository.LivroRepository;
 
@@ -15,6 +16,20 @@ public class LivroService {
 	private LivroRepository livroRepository;
 	
 	public Livro cadastrarLivro(Livro livro) {
+		if(livro.getIsbn() == null || livro.getIsbn().isEmpty())
+			throw new CampoObrigatorioException("ISBN");
+		
+		if(livro.getTitulo() == null || livro.getTitulo().isEmpty())
+			throw new CampoObrigatorioException("Título");
+		
+		if(livro.getValorDiaria() == null)
+			throw new CampoObrigatorioException("Valor Diária");
+		
+		if(livro.getExemplares() == null)
+			throw new CampoObrigatorioException("Exemplares");
+				
+		if(livro.getReservados() == null)
+			throw new CampoObrigatorioException("Reservados");
 		
 		return livroRepository.save(livro);
 	}
