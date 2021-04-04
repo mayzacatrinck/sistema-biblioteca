@@ -24,8 +24,8 @@ public class CadastroController {
 	private CadastroService cadastroService;
 
 	@PostMapping
-	public void cadastrarUsuario(@Valid @RequestBody CadastroDto cadastro) {
-		cadastroService.cadastrarUsuario(cadastro);
+	public Integer cadastrarUsuario(@Valid @RequestBody CadastroDto cadastro) {
+		return cadastroService.cadastrarUsuario(cadastro).getId();
 	}
 
 	@GetMapping("/todos")

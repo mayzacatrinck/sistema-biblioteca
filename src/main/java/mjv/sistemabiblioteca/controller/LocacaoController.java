@@ -23,8 +23,8 @@ public class LocacaoController {
 	private LocacaoService locacaoService;
 
 	@PostMapping
-	public void gerarLocacao(@Valid @RequestBody LocacaoDto locacao) {
-		locacaoService.gerarLocacao(locacao);
+	public Integer gerarLocacao(@Valid @RequestBody LocacaoDto locacao) {
+		return locacaoService.gerarLocacao(locacao).getId();
 	}
 
 	@GetMapping("/consulta")

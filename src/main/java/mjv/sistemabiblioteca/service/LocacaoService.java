@@ -33,7 +33,7 @@ public class LocacaoService {
 	@Autowired
 	private LivroRepository livroRepository;
 
-	public void gerarLocacao(LocacaoDto locDto) {
+	public Locacao gerarLocacao(LocacaoDto locDto) {
 
 		Cadastro cliente = cadastroRepository.findById(locDto.getIdCliente())
 				.orElseThrow(() -> new RegistroNaoLocalizadoException("Usuário não localizado"));
@@ -50,7 +50,7 @@ public class LocacaoService {
 			}
 		}
 
-		locacaoRepository.save(locacao);
+		return locacaoRepository.save(locacao);
 	}
 
 	private void adicionarItem(LocacaoDto locDto, Locacao locacao) {
