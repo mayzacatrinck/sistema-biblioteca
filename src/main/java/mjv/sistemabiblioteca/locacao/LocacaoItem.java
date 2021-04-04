@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import mjv.sistemabiblioteca.model.cadastro.Livro;
 import mjv.sistemabiblioteca.model.locacao.Locacao;
 
@@ -36,6 +38,7 @@ public class LocacaoItem {
 	@Column(name = "valor_locacao")
 	private Double valorLocacao;
 	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "locacao_id", nullable = false)
 	private Locacao locacao;

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import mjv.sistemabiblioteca.dto.CadastroDto;
 import mjv.sistemabiblioteca.exception.BusinessException;
+import mjv.sistemabiblioteca.exception.RegistroNaoLocalizadoException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.model.cadastro.Endereco;
 import mjv.sistemabiblioteca.repository.CadastroRepository;
@@ -57,15 +58,15 @@ public class CadastroService {
 	}
 
 	public Cadastro buscarUsuarioId(Integer id) {
-		return cadastroRepository.findById(id).orElse(null);
+		return cadastroRepository.findById(id).orElseThrow(() -> new RegistroNaoLocalizadoException("Usuário não localizado"));
 	}
 
 	public Cadastro buscaUsuarioCpf(String cpf) {
-		return cadastroRepository.findByCpf(cpf).orElse(null);
+		return cadastroRepository.findByCpf(cpf).orElseThrow(() -> new RegistroNaoLocalizadoException("CPF não localizado"));
 	}
 
 	public Cadastro buscaUsuarioLogin(String login) {
-		return cadastroRepository.findByLoginUsuario(login).orElse(null);
+		return cadastroRepository.findByLoginUsuario(login).orElseThrow(() -> new RegistroNaoLocalizadoException("Login não localizada"));
 	}
 
 }

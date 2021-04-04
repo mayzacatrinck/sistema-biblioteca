@@ -24,27 +24,27 @@ public class CadastroController {
 	private CadastroService cadastroService;
 
 	@PostMapping
-	public void postCadastrarUsuario(@Valid @RequestBody CadastroDto cadastro) {
+	public void cadastrarUsuario(@Valid @RequestBody CadastroDto cadastro) {
 		cadastroService.cadastrarUsuario(cadastro);
 	}
 
 	@GetMapping("/todos")
-	public List<Cadastro> getListarUsuarios() {
+	public List<Cadastro> listarUsuarios() {
 		return cadastroService.buscarTodosUsuarios();
 	}
 
 	@GetMapping("/id")
-	public Cadastro getUsuarioId(@RequestParam Integer id) {
+	public Cadastro buscarUsuarioId(@RequestParam Integer id) {
 		return cadastroService.buscarUsuarioId(id);
 	}
 
 	@GetMapping("/cpf")
-	public Cadastro getUsuarioCpf(@RequestParam String cpf) {
+	public Cadastro buscarUsuarioCpf(@RequestParam String cpf) {
 		return cadastroService.buscaUsuarioCpf(cpf);
 	}
 
 	@GetMapping("/login")
-	public Cadastro getUsuarioLogin(@RequestParam String login) {
+	public Cadastro buscarUsuarioLogin(@RequestParam String login) {
 		return cadastroService.buscaUsuarioLogin(login);
 	}
 

@@ -3,18 +3,25 @@ package mjv.sistemabiblioteca.dto;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 public class LocacaoDto {
 
-	private Integer idCadastro;
+	@NotNull(message = "{cliente.notempty}")
+	private Integer idCliente;
+
 	private LocalDate dataRetirada;
+
+	@Valid
 	private List<LocacaoItemDto> itens;
 
-	public Integer getIdCadastro() {
-		return idCadastro;
+	public Integer getIdCliente() {
+		return idCliente;
 	}
 
-	public void setIdCadastro(Integer idCadastro) {
-		this.idCadastro = idCadastro;
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
 	}
 
 	public void setDataRetirada(LocalDate dataRetirada) {

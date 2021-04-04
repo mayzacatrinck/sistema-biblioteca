@@ -1,7 +1,7 @@
 package mjv.sistemabiblioteca.dto;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
 
 import mjv.sistemabiblioteca.model.cadastro.Livro;
 
@@ -12,16 +12,16 @@ public class LivroDto {
 	@NotBlank(message = "{titulo.notempty}")
 	private String titulo;
 	
-	@NotBlank(message = "{valorDiaria.notempty}")
-	@Size(min = 0, max = 100, message = "{valorDiaria.notvalid}")
+	@NotNull(message = "{valorDiaria.notempty}")
+	// @Size(min = 0, max = 100, message = "{valorDiaria.notvalid}")
 	private Double valorDiaria;
 	
-	@NotBlank(message = "{exemplares.notempty}")
-	@Size(min = 1, max = 10, message = "{exemplares.notvalid}")
+	@NotNull(message = "{exemplares.notempty}")
+	// @Size(min = 1, max = 10, message = "{exemplares.notvalid}")
 	private Integer exemplares;
 	
-	@NotBlank(message = "{reservados.notempty}")
-	@Size(min = 0, max = 10, message = "{reservados.notvalid}")
+	@NotNull(message = "{reservados.notempty}")
+	// @Size(min = 0, max = 10, message = "{reservados.notvalid}")
 	private Integer reservados;
 	
 	public Livro cadastraLivro() {		

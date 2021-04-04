@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import mjv.sistemabiblioteca.locacao.LocacaoItem;
 import mjv.sistemabiblioteca.locacao.LocacaoStatus;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
@@ -44,17 +46,20 @@ public class Locacao {
 
 	@ManyToOne
 	@JoinColumn(name = "cadastro_id", nullable = false)
-	private Cadastro cadastro;
+	private Cadastro cliente;
 
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.PERSIST, mappedBy = "locacao")
 	private List<LocacaoItem> itens = new ArrayList<LocacaoItem>();
 
 	@Enumerated(EnumType.STRING)
-	private LocacaoStatus status;
+	private LocacaoStatus status = LocacaoStatus.RESERVADA;
 
 	public void addItem(LocacaoItem item) {
 		item.setLocacao(this);
-		this.valorTotal = this.valorTotal + item.getValorLocacao();
+		if (item.getValorLocacao() != null) {
+			this.valorTotal = this.valorTotal + item.getValorLocacao();
+		}
 		itens.add(item);
 	}
 
@@ -86,12 +91,12 @@ public class Locacao {
 		this.dataFinalizacao = dataFinalizacao;
 	}
 
-	public Cadastro getCadastro() {
-		return cadastro;
+	public Cadastro getCliente() {
+		return cliente;
 	}
 
-	public void setCadastro(Cadastro cadastro) {
-		this.cadastro = cadastro;
+	public void setCliente(Cadastro cliente) {
+		this.cliente = cliente;
 	}
 
 	public List<LocacaoItem> getItens() {
@@ -114,10 +119,19 @@ public class Locacao {
 		return valorTotal;
 	}
 
+	public void calculaValorTotal() {
+		Double valorTotal = 0.0;
+
+		for (LocacaoItem item : this.getItens()) {
+			valorTotal += item.getValorLocacao();
+		}
+
+		this.valorTotal = valorTotal;
+	}
+
 	@PrePersist
 	private void prePersist() {
 		this.dataAgendamento = LocalDate.now();
-		this.status = LocacaoStatus.RESERVADA;
 	}
 
 	@Override

@@ -2,9 +2,14 @@ package mjv.sistemabiblioteca.dto;
 
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotNull;
+
 public class LocacaoItemDto {
 
+	@NotNull(message = "{livro.notempty}")
 	private Integer idLivro;
+	
+	@NotNull(message = "{dataprevisaoentrega.notempty}")
 	private LocalDate dataPrevisaoEntrega;
 
 	public Integer getIdLivro() {
