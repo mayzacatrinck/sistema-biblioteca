@@ -129,6 +129,10 @@ public class LocacaoService {
 		Locacao locacao = locacaoRepository.findById(itemEntrega.getIdLocacao())
 				.orElseThrow(() -> new RegistroNaoLocalizadoException("Locação não localizada"));
 
+		if (locacao.getStatus() != LocacaoStatus.EFETIVADA) {
+			throw new BusinessException("Locação não foi efetivada");
+		}
+
 		LocacaoItem locacaoItemEncontrado = null;
 
 		for (LocacaoItem item : locacao.getItens()) {
