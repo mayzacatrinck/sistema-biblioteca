@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import mjv.sistemabiblioteca.model.cadastro.Livro;
+import mjv.sistemabiblioteca.model.locacao.Livro;
 
 @Repository
 public interface LivroRepository extends JpaRepository<Livro, Integer> {

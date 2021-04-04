@@ -20,8 +20,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-import mjv.sistemabiblioteca.locacao.LocacaoItem;
-import mjv.sistemabiblioteca.locacao.LocacaoStatus;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 
 @Entity

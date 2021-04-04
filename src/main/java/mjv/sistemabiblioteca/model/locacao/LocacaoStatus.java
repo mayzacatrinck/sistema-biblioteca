@@ -1,4 +1,4 @@
-package mjv.sistemabiblioteca.locacao;
+package mjv.sistemabiblioteca.model.locacao;
 
 public enum LocacaoStatus {
 

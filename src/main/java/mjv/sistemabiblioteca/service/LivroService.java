@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import mjv.sistemabiblioteca.dto.LivroDto;
 import mjv.sistemabiblioteca.exception.BusinessException;
-import mjv.sistemabiblioteca.model.cadastro.Livro;
+import mjv.sistemabiblioteca.model.locacao.Livro;
 import mjv.sistemabiblioteca.repository.LivroRepository;
 
 @Service

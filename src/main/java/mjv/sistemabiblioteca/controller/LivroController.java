@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import mjv.sistemabiblioteca.model.cadastro.Livro;
 import mjv.sistemabiblioteca.dto.LivroDto;
+import mjv.sistemabiblioteca.model.locacao.Livro;
 import mjv.sistemabiblioteca.service.LivroService;
 
 @RestController
-@RequestMapping(path = "/livro")
+@RequestMapping(path = "/livros")
 public class LivroController {
 	
 	@Autowired

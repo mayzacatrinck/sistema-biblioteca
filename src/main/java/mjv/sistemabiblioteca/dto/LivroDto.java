@@ -3,7 +3,7 @@ package mjv.sistemabiblioteca.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import mjv.sistemabiblioteca.model.cadastro.Livro;
+import mjv.sistemabiblioteca.model.locacao.Livro;
 
 public class LivroDto {	
 	@NotBlank(message = "{isbn.notempty}")
