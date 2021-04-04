@@ -5,7 +5,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import mjv.sistemabiblioteca.exception.CampoObrigatorioException;
+import mjv.sistemabiblioteca.dto.LivroDto;
+import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Livro;
 import mjv.sistemabiblioteca.repository.LivroRepository;
 
@@ -15,39 +16,36 @@ public class LivroService {
 	@Autowired
 	private LivroRepository livroRepository;
 	
-	public Livro cadastrarLivro(Livro livro) {
-		if(livro.getIsbn() == null || livro.getIsbn().isEmpty())
-			throw new CampoObrigatorioException("ISBN");
+	public Livro cadastrarLivro(LivroDto livroDto) {
 		
-		if(livro.getTitulo() == null || livro.getTitulo().isEmpty())
-			throw new CampoObrigatorioException("Título");
+		verificaExistenciaLivro(livroDto);
 		
-		if(livro.getValorDiaria() == null)
-			throw new CampoObrigatorioException("Valor Diária");
-		
-		if(livro.getExemplares() == null)
-			throw new CampoObrigatorioException("Exemplares");
-				
-		if(livro.getReservados() == null)
-			throw new CampoObrigatorioException("Reservados");
+		Livro livro = livroDto.cadastraLivro();
 		
 		return livroRepository.save(livro);
+	}
+	
+	private void verificaExistenciaLivro(LivroDto livroDto) {		
+		Optional<Livro> buscaTitulo = Optional.ofNullable(buscarTitulo(livroDto.getTitulo()));
+		
+		if(buscaTitulo.isPresent()) {
+			throw new BusinessException("Título já cadastrado.");
+		}
 	}
 	
 	public Iterable<Livro> buscarTodosLivros() {
 		return livroRepository.findAll();
 	}
 	
-	public Optional<Livro> buscarLivro(Integer id){
-		return livroRepository.findById(id);
+	public Livro buscarId(Integer id){
+		return livroRepository.findById(id).orElse(null);
 	}
 	
-	public Optional<Livro> buscarTitulo(String titulo){
-		return livroRepository.findByTitulo(titulo);
+	public Livro buscarTitulo(String titulo){
+		return livroRepository.findByTitulo(titulo).orElse(null);
 	}
 	
-	public Optional<Livro> buscarIsbn(String isbn){
-		return livroRepository.findByIsbn(isbn);
+	public Livro buscarIsbn(String isbn){
+		return livroRepository.findByIsbn(isbn).orElse(null);
 	}
-	
 }
