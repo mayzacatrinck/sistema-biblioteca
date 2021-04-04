@@ -31,7 +31,7 @@ data_agendamento DATE NOT NULL,
 data_retirada DATE,
 data_finalizacao DATE,
 valor_total DOUBLE,
-status ENUM ('reservada', 'efetivada', 'finalizada'),
+status ENUM ('RESERVADA', 'EFETIVADA', 'FINALIZADA'),
 cadastro_id INT NOT NULL
 );
 
