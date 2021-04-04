@@ -22,22 +22,22 @@ public class LivroController {
 	private LivroService livroService;
 	
 	@PostMapping
-	public void postCadastrarLivro(@Valid @RequestBody LivroDto livro) {
+	public void cadastrarLivro(@Valid @RequestBody LivroDto livro) {
 		livroService.cadastrarLivro(livro);
 	}
 
 	@GetMapping("/todos")
-	public Iterable<Livro> getListarLivros() {
+	public Iterable<Livro> listarLivros() {
 		return livroService.buscarTodosLivros();
 	}
 	
 	@GetMapping("/id")
-	public Livro getId(@RequestParam Integer id) {
+	public Livro buscarLivroId(@RequestParam Integer id) {
 		return livroService.buscarId(id);
 	}
 	
 	@GetMapping("/isbn")
-	public Livro getIsbn(@RequestParam String isbn) {
+	public Livro buscarLivroIsbn(@RequestParam String isbn) {
 		return livroService.buscarIsbn(isbn);
 	}
 }
