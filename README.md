@@ -24,7 +24,7 @@ Dividimos as classes em pacotes de acordo com suas responsabilidades.
 * Exception: onde definimos nossas exceções
 * Configuration: onde definimos as configurações do Swagger para documentar a API, a segurança do Spring Security e JWT
 
-![Estrutura do Projeto](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/Estrutura%20projeto%20no%20Eclipse.png)
+![Estrutura do Projeto](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/Estrutura%20projeto.png)
 
 #### Descrição do projeto
 
