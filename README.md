@@ -29,3 +29,21 @@ Dividimos as classes em pacotes de acordo com suas responsabilidades.
 #### Descrição do projeto
 
 A descrição do projeto pode ser acessada [aqui](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/src/assets/Back%20-%20Biblioteca.docx.pdf)
+
+### Na pagina do Swagger estará disponível e exibindo todos os recursos da API.
+
+#### Cadastros
+
+![Swagger Cadastro Usuário](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/swagger_cadastro.PNG)
+
+#### Login
+
+![Swagger Login](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/swagger_login.PNG)
+
+#### Livros
+
+![Swagger Login](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/swagger_livro.PNG)
+
+#### Locação
+
+![Swagger Login](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/swagger_locacao.PNG)
