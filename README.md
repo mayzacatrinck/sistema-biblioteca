@@ -1,7 +1,7 @@
 # Sistema Biblioteca 📚
 Sistema desenvolvido como desafio na DevSchool MJV
 
-* API de uma Biblioteca com cadastro de usuários, livros e locações. A documentação da API pode ser acessada em **link Heroku**
+* API de uma Biblioteca com cadastro de usuários, livros e locações.
 
 #### Grupo 3
                 
@@ -47,3 +47,5 @@ A descrição do projeto pode ser acessada [aqui](https://github.com/MJV-Grupo3/
 #### Locação
 
 ![Swagger Login](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/swagger_locacao.PNG)
+
+A documentação da API pode ser acessada em [Heroku Swagger](https://sistema-biblioteca-mjv.herokuapp.com/swagger-ui.html#)
