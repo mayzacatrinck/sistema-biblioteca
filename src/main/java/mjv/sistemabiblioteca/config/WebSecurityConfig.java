@@ -27,9 +27,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 		http.cors().and().csrf().ignoringAntMatchers("/h2-console/**").disable()
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
-				.authorizeRequests().antMatchers(SWAGGER_WHITELIST).permitAll().antMatchers("/login").permitAll()
+				.authorizeRequests().antMatchers(SWAGGER_WHITELIST).permitAll()
+				.antMatchers("/login").permitAll()
+				.antMatchers("/cadastros/**").permitAll()
+				
 				.antMatchers("/h2-console/**").permitAll()
-
+					
 				.anyRequest().authenticated().and().headers().frameOptions().sameOrigin().and().sessionManagement()
 				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
