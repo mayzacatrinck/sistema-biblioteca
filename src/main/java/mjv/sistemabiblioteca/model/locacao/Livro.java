@@ -79,6 +79,11 @@ public class Livro {
 		reservados++;
 	}
 
+	public void decrementarReservado() {
+		exemplares++;
+		reservados--;
+	}
+
 	@Override
 	public String toString() {
 		return "Livro [id=" + id + ", titulo=" + titulo + ", valorDiaria=" + valorDiaria + "]";

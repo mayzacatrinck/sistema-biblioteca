@@ -151,7 +151,7 @@ public class LocacaoService {
 		}
 
 		locacaoItemEncontrado.setDataEntrega(LocalDate.now());
-		locacaoItemEncontrado.getLivro().incrementarReservado();
+		locacaoItemEncontrado.getLivro().decrementarReservado();
 
 		calcularLocacao(locacao, locacaoItemEncontrado);
 
