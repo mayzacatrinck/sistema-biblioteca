@@ -1,5 +1,8 @@
 package mjv.sistemabiblioteca.controller;
 
+import java.time.LocalDate;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +43,28 @@ public class LocacaoController {
 	@PutMapping("/entregarLivros/{idItem}")
 	public void entregarLivro(@Valid @RequestBody EntregaItemDto idItem) {
 		locacaoService.entregarLivro(idItem);
+	}
+
+	@GetMapping("/locacaoDataAgendamento")
+	public List<Locacao> locacaoDataAgendamento(String dataAgendamento) {
+		LocalDate date = LocalDate.parse(dataAgendamento);
+		return locacaoService.buscarLocacaoDataAgendamento(date);
+	}
+
+	@GetMapping("/locacaoDataRetirada")
+	public List<Locacao> locacaoDataRetirada(String dataRetirada) {
+		LocalDate date = LocalDate.parse(dataRetirada);
+		return locacaoService.buscarLocacaoDataRetirada(date);
+	}
+
+	@GetMapping("/locacaoStatus")
+	public List<Locacao> locacaoStatus(String status) {
+		return locacaoService.buscarLocacaoStatus(status);
+	}
+
+	@GetMapping("/locacaoCliente")
+	public List<Locacao> locacaoCliente(Integer idCliente) {
+		return locacaoService.buscarLocacaoCliente(idCliente);
 	}
 
 }

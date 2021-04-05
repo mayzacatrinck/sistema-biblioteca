@@ -2,6 +2,7 @@ package mjv.sistemabiblioteca.service;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -194,5 +195,21 @@ public class LocacaoService {
 	public Locacao buscarLocacao(Integer id) {
 		return locacaoRepository.findById(id)
 				.orElseThrow(() -> new RegistroNaoLocalizadoException("Locação não localizada"));
+	}
+
+	public List<Locacao> buscarLocacaoDataAgendamento(LocalDate dataAgendamento) {
+		return locacaoRepository.findByDataAgendamento(dataAgendamento);
+	}
+
+	public List<Locacao> buscarLocacaoDataRetirada(LocalDate dataRetirada) {
+		return locacaoRepository.findByDataRetirada(dataRetirada);
+	}
+
+	public List<Locacao> buscarLocacaoStatus(String status) {
+		return locacaoRepository.findByStatusList(status);
+	}
+
+	public List<Locacao> buscarLocacaoCliente(Integer id) {
+		return locacaoRepository.findByClienteId(id);
 	}
 }
