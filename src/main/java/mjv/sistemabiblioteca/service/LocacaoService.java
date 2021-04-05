@@ -108,9 +108,7 @@ public class LocacaoService {
 		Locacao locacao = locacaoRepository.findById(locacaoId)
 				.orElseThrow(() -> new RegistroNaoLocalizadoException("Locação não localizada"));
 
-		if (locacao.getStatus() == LocacaoStatus.EFETIVADA) {
-			throw new BusinessException("Locação já encontra-se como efetivada");
-		}
+		validaStatusRetiradaLivro(locacao);
 
 		locacao.setDataRetirada(LocalDate.now());
 		locacao.setStatus(LocacaoStatus.EFETIVADA);
@@ -124,27 +122,20 @@ public class LocacaoService {
 		return locacaoRepository.save(locacao);
 	}
 
+	private void validaStatusRetiradaLivro(Locacao locacao) {
+		if (locacao.getStatus() == LocacaoStatus.EFETIVADA || locacao.getStatus() == LocacaoStatus.FINALIZADA) {
+			throw new BusinessException("Locação já encontra-se como efetivada ou finalizada");
+		}
+	}
+
 	public void entregarLivro(EntregaItemDto itemEntrega) {
 
 		Locacao locacao = locacaoRepository.findById(itemEntrega.getIdLocacao())
 				.orElseThrow(() -> new RegistroNaoLocalizadoException("Locação não localizada"));
 
-		if (locacao.getStatus() != LocacaoStatus.EFETIVADA) {
-			throw new BusinessException("Locação não foi efetivada");
-		}
+		validaStatusEntregaLivro(locacao);
 
-		LocacaoItem locacaoItemEncontrado = null;
-
-		for (LocacaoItem item : locacao.getItens()) {
-			if (itemEntrega.getIdItem() == item.getId()) {
-				locacaoItemEncontrado = item;
-				break;
-			}
-		}
-
-		if (locacaoItemEncontrado == null) {
-			throw new RegistroNaoLocalizadoException("Id do item não encontrado");
-		}
+		LocacaoItem locacaoItemEncontrado = localizarItem(itemEntrega, locacao);
 
 		if (locacaoItemEncontrado.getDataEntrega() != null) {
 			throw new BusinessException("Item já entregue");
@@ -160,11 +151,33 @@ public class LocacaoService {
 		locacaoRepository.save(locacao);
 	}
 
-	private void finalizarLocacao(Locacao locacao) {
-
+	private void validaStatusEntregaLivro(Locacao locacao) {
 		if (locacao.getStatus() == LocacaoStatus.FINALIZADA) {
-			new BusinessException("Locação já encontra-se como finalizada");
+			throw new BusinessException("Locação já foi finalizada");
 		}
+
+		if (locacao.getStatus() != LocacaoStatus.EFETIVADA) {
+			throw new BusinessException("Locação não foi efetivada");
+		}
+	}
+
+	private LocacaoItem localizarItem(EntregaItemDto itemEntrega, Locacao locacao) {
+		LocacaoItem locacaoItemEncontrado = null;
+
+		for (LocacaoItem item : locacao.getItens()) {
+			if (itemEntrega.getIdItem() == item.getId()) {
+				locacaoItemEncontrado = item;
+				break;
+			}
+		}
+
+		if (locacaoItemEncontrado == null) {
+			throw new RegistroNaoLocalizadoException("Id do item não encontrado");
+		}
+		return locacaoItemEncontrado;
+	}
+
+	private void finalizarLocacao(Locacao locacao) {
 
 		for (LocacaoItem locacaoItem : locacao.getItens()) {
 			if (locacaoItem.getDataEntrega() == null) {
