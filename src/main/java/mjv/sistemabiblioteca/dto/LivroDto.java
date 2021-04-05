@@ -13,15 +13,12 @@ public class LivroDto {
 	private String titulo;
 	
 	@NotNull(message = "{valorDiaria.notempty}")
-	// @Size(min = 0, max = 100, message = "{valorDiaria.notvalid}")
 	private Double valorDiaria;
 	
 	@NotNull(message = "{exemplares.notempty}")
-	// @Size(min = 1, max = 10, message = "{exemplares.notvalid}")
 	private Integer exemplares;
 	
 	@NotNull(message = "{reservados.notempty}")
-	// @Size(min = 0, max = 10, message = "{reservados.notvalid}")
 	private Integer reservados;
 	
 	public Livro cadastraLivro() {		
