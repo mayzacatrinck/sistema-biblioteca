@@ -29,7 +29,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterAfter(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class)
 				.authorizeRequests().antMatchers(SWAGGER_WHITELIST).permitAll()
 				.antMatchers("/login").permitAll()
-				.antMatchers("/cadastros/**").permitAll()
+//				.antMatchers("/cadastros/**").permitAll()
 				
 				.antMatchers("/h2-console/**").permitAll()
 					
