@@ -1,4 +1,4 @@
-# Sistema Biblioteca 📚
+﻿# Sistema Biblioteca 📚
 Sistema desenvolvido como desafio na DevSchool MJV
 
 * API de uma Biblioteca com cadastro de usuários, livros e locações.
@@ -7,9 +7,7 @@ Sistema desenvolvido como desafio na DevSchool MJV
                 
 + [Mayza](https://github.com/mayzacatrinck)
 + [Priscila](https://github.com/Prissie)
-+ ~~Ian~~
-+ ~~João Oliveira~~
-+ ~~Lucas Anastacio~~
+
 
 
 ### Estrutura do Projeto
