@@ -46,4 +46,4 @@ A descrição do projeto pode ser acessada [aqui](https://github.com/MJV-Grupo3/
 
 ![Swagger Login](https://github.com/MJV-Grupo3/sistema-biblioteca/blob/main/imagens/swagger_locacao.PNG)
 
-A documentação da API pode ser acessada em [Heroku Swagger](https://sistema-biblioteca-mjv.herokuapp.com/swagger-ui.html#)
+A documentação da API pode ser acessada em [Heroku Swagger](https://sistema-biblioteca.herokuapp.com/swagger-ui.html#)
