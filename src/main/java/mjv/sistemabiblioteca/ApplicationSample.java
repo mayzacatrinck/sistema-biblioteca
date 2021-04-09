@@ -16,10 +16,10 @@ public class ApplicationSample {
 	public void usuarioPadrao() {
 		CadastroDto cadastro = new CadastroDto();
 		cadastro.setNome("Usuario Padrao");
-		cadastro.setCpf("12574486557");
+		cadastro.setCpf("60639631037");
 		cadastro.setTelefone("478785475");
 		cadastro.setEmail("padrao@gmail.com");
-		cadastro.setCep("23045040");
+		cadastro.setCep("20230010");
 
 		LoginDto login = new LoginDto();
 		login.setUsuario("mjv");
