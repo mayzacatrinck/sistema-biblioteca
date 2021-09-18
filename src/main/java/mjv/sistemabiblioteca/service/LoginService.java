@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import mjv.sistemabiblioteca.config.JWTConstants;
 import mjv.sistemabiblioteca.config.JWTUtils;
-import mjv.sistemabiblioteca.dto.LoginDto;
+import mjv.sistemabiblioteca.dto.LoginRequest;
 import mjv.sistemabiblioteca.exception.BusinessException;
 import mjv.sistemabiblioteca.model.cadastro.Cadastro;
 import mjv.sistemabiblioteca.model.cadastro.Sessao;
@@ -24,7 +24,7 @@ public class LoginService {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	public Sessao logar(LoginDto login) {
+	public Sessao logar(LoginRequest login) {
 
 		Optional<Cadastro> usuario = Optional.ofNullable(cadastroRepository.findByLoginUsuario(login.getUsuario())
 				.orElseThrow(() -> new BusinessException("Login inválido")));

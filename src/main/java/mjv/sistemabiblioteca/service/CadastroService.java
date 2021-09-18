@@ -1,18 +1,17 @@
 package mjv.sistemabiblioteca.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import mjv.sistemabiblioteca.dto.CadastroRequest;
+import mjv.sistemabiblioteca.dto.EnderecoResponse;
+import mjv.sistemabiblioteca.exception.BusinessException;
+import mjv.sistemabiblioteca.exception.RegistroNaoLocalizadoException;
+import mjv.sistemabiblioteca.model.cadastro.Cadastro;
+import mjv.sistemabiblioteca.repository.CadastroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import mjv.sistemabiblioteca.dto.CadastroDto;
-import mjv.sistemabiblioteca.exception.BusinessException;
-import mjv.sistemabiblioteca.exception.RegistroNaoLocalizadoException;
-import mjv.sistemabiblioteca.model.cadastro.Cadastro;
-import mjv.sistemabiblioteca.model.cadastro.Endereco;
-import mjv.sistemabiblioteca.repository.CadastroRepository;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CadastroService {
@@ -26,26 +25,26 @@ public class CadastroService {
 	@Autowired
 	private PasswordEncoder encoder;
 
-	public Cadastro cadastrarUsuario(CadastroDto cadDto) {
+	public Cadastro cadastrarUsuario(CadastroRequest cadastroRequest) {
 
-		validaCampoUnico(cadDto);
+		validaCampoUnico(cadastroRequest);
 
-		Cadastro cadastro = cadDto.toCadastro();
+		Cadastro cadastro = cadastroRequest.toCadastro();
 
-		Endereco endereco = cepService.consultaCep(cadDto.getCep());
+		EnderecoResponse enderecoResponse = cepService.consultaCep(cadastroRequest.getCep());
 
-		cadastro.setEndereco(endereco);
+		cadastro.setEndereco(enderecoResponse);
 
-		String senhaCriptografada = encoder.encode(cadDto.getLogin().getSenha());
+		String senhaCriptografada = encoder.encode(cadastroRequest.getLogin().getSenha());
 		cadastro.getLogin().setSenha(senhaCriptografada);
 
 		return cadastroRepository.save(cadastro);
 
 	}
 
-	private void validaCampoUnico(CadastroDto cadDto) {
-		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(cadDto.getCpf());
-		Optional<Cadastro> buscaUsuario = cadastroRepository.findByLoginUsuario(cadDto.getLogin().getUsuario());
+	private void validaCampoUnico(CadastroRequest cadastroRequest) {
+		Optional<Cadastro> buscaCpf = cadastroRepository.findByCpf(cadastroRequest.getCpf());
+		Optional<Cadastro> buscaUsuario = cadastroRepository.findByLoginUsuario(cadastroRequest.getLogin().getUsuario());
 
 		if (buscaCpf.isPresent() || buscaUsuario.isPresent()) {
 			throw new BusinessException("CPF ou Usuário já cadastrados.");

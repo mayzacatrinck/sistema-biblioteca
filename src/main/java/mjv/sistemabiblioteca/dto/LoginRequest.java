@@ -5,22 +5,14 @@ import javax.validation.constraints.Size;
 
 import mjv.sistemabiblioteca.model.cadastro.Login;
 
-public class LoginDto {
+public class LoginRequest {
 
-	@NotBlank(message = "{usuario.notempty}")
-	@Size(max = 20, message = "{usuario.notvalid}")
+	@NotBlank
+	@Size(max = 20)
 	private String usuario;
 
-	@NotBlank(message = "{senha.notempty}")
+	@NotBlank
 	private String senha;
-
-	public Login toLogin() {
-		Login login = new Login();
-		login.setUsuario(this.getUsuario());
-		login.setSenha(this.getSenha());
-		return login;
-
-	}
 
 	public String getUsuario() {
 		return usuario;
@@ -37,5 +29,10 @@ public class LoginDto {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
+
+	public Login toLogin() {
+		return new Login(usuario, senha);
+	}
+
 
 }
