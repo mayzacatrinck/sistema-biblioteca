@@ -2,7 +2,7 @@
 Sistema desenvolvido como desafio na DevSchool Java MJV
 
 * API de uma Biblioteca com cadastro de usuários, livros e locações.
-Java/Spring
+* Java + Spring
 
 #### Grupo 3
                 
