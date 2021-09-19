@@ -1,7 +1,8 @@
 ﻿# Sistema Biblioteca 📚
-Sistema desenvolvido como desafio na DevSchool MJV
+Sistema desenvolvido como desafio na DevSchool Java MJV
 
 * API de uma Biblioteca com cadastro de usuários, livros e locações.
+Java/Spring
 
 #### Grupo 3
                 
